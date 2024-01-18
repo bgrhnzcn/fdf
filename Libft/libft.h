@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:20:27 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/17 21:35:53 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/18 21:25:34 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
+# ifdef USE_MATH
+#  include <math.h>
+# endif
 # include "structs.h"
 
 # define PI		3.14159265358979323846
@@ -69,109 +71,104 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 String arrays must be null-ended.*/
 size_t		ft_strarrlen(char **arr);
 //Free all the arrays inside double array.
-void		free_str_arr(char **str_arr);
+void		ft_free_str_arr(char **str_arr);
 /*Hexadecimal version of atoi().
 It works both of uppercase and lowercase versions.*/
 int			ft_atoi_hex(const char *str);
 //Degree to Radian conversions.
-double		deg_to_rad(double deg);
+double		ft_deg_to_rad(double deg);
 //Radian to Degree conversions.
-double		rad_to_deg(double rad);
+double		ft_rad_to_deg(double rad);
 
 //----------------------------- Mapping ----------------------------------
 
 //Initializes map from given values to use inside map function.
-t_map		map_init(double min_i, double max_i, double min_o, double max_o);
+t_map		ft_map_init(double min_i, double max_i, double min_o, double max_o);
 /*Gives normalized value (0 to 1 range value)
 of given value inside specified range.*/
-double		normalize(double val, double min, double max);
+double		ft_normalize(double val, double min, double max);
 /*Gets normalized value (0 to 1 range value)
 and gives the value corresponding on specified range.*/
-double		lerp(double val, double min, double max);
+double		ft_lerp(double val, double min, double max);
 //This function uses t_map to convert value from one range to another.
-double		map(double val, t_map map);
+double		ft_map(double val, t_map map);
 
-t_vec2		vec2_set(double x, double y);
-t_vec2		vec2_sub(t_vec2	vec1, t_vec2 vec2);
-t_vec2		vec2_add(t_vec2 vec1, t_vec2 vec2);
-t_vec2		vec2_mul(t_vec2 vec, double mul);
-t_vec2		vec2_div(t_vec2 vec, double div);
+t_vec2		ft_vec2_set(double x, double y);
+t_vec2		ft_vec2_sub(t_vec2	vec1, t_vec2 vec2);
+t_vec2		ft_vec2_add(t_vec2 vec1, t_vec2 vec2);
+t_vec2		ft_vec2_mul(t_vec2 vec, double mul);
+t_vec2		ft_vec2_div(t_vec2 vec, double div);
 
-t_vec3		vec3_set(double x, double y, double z);
-t_vec3		vec3_sub(t_vec3	vec1, t_vec3 vec2);
-t_vec3		vec3_add(t_vec3 vec1, t_vec3 vec2);
-t_vec3		vec3_mul(t_vec3 vec, double mul);
-t_vec3		vec3_div(t_vec3 vec, double div);
+t_vec3		ft_vec3_set(double x, double y, double z);
+t_vec3		ft_vec3_sub(t_vec3	vec1, t_vec3 vec2);
+t_vec3		ft_vec3_add(t_vec3 vec1, t_vec3 vec2);
+t_vec3		ft_vec3_mul(t_vec3 vec, double mul);
+t_vec3		ft_vec3_div(t_vec3 vec, double div);
 
-t_vec4		vec4_set(double x, double y, double z, double w);
-t_vec4		vec4_add(t_vec4 vec1, t_vec4 vec2);
-t_vec4		vec4_sub(t_vec4 vec1, t_vec4 vec2);
-t_vec4		vec4_mul(t_vec4 vec, double mul);
-t_vec4		vec4_div(t_vec4 vec, double div);
+t_vec4		ft_vec4_set(double x, double y, double z, double w);
+t_vec4		ft_vec4_add(t_vec4 vec1, t_vec4 vec2);
+t_vec4		ft_vec4_sub(t_vec4 vec1, t_vec4 vec2);
+t_vec4		ft_vec4_mul(t_vec4 vec, double mul);
+t_vec4		ft_vec4_div(t_vec4 vec, double div);
 
-t_vec2		vec2_norm(t_vec2 vec);
+t_vec2		ft_vec2_norm(t_vec2 vec);
 
-double		vec2_dot(t_vec2 vec1, t_vec2 vec2);
-double		get_dist2(t_vec2 point1, t_vec2 point);
-double		vec2_mag(t_vec2 vec);
+double		ft_vec2_dot(t_vec2 vec1, t_vec2 vec2);
+double		ft_get_dist2(t_vec2 point1, t_vec2 point);
+double		ft_vec2_mag(t_vec2 vec);
 
-t_vec3		vec3_norm(t_vec3 vec);
-t_vec3		vec3_cross(t_vec3 vec1, t_vec3 vec2);
+t_vec3		ft_vec3_norm(t_vec3 vec);
+t_vec3		ft_vec3_cross(t_vec3 vec1, t_vec3 vec2);
 
-double		vec3_dot(t_vec3 vec1, t_vec3 vec2);
-double		get_dist3(t_vec3 point1, t_vec3 point);
-double		vec3_mag(t_vec3 vec);
+double		ft_vec3_dot(t_vec3 vec1, t_vec3 vec2);
+double		ft_get_dist3(t_vec3 point1, t_vec3 point);
+double		ft_vec3_mag(t_vec3 vec);
 
-t_vec4		vec4_norm(t_vec4 vec);
+t_vec4		ft_vec4_norm(t_vec4 vec);
 
-double		vec4_dot(t_vec4 vec1, t_vec4 vec2);
-double		vec4_mag(t_vec4 vec);
+double		ft_vec4_dot(t_vec4 vec1, t_vec4 vec2);
+double		ft_vec4_mag(t_vec4 vec);
 
 //------------------------------ Basic Matrix Functions ---------------------
 
 //3D matrix row setter.
-void		set_row3(t_mtx3 *mtx, int row_val, t_vec3 row);
+void		ft_set_row3(t_mtx3 *mtx, int row_val, t_vec3 row);
 //Get values in row of 3D matrix.
-t_vec3		get_row3(t_mtx3 mtx, int row_val);
+t_vec3		ft_get_row3(t_mtx3 mtx, int row_val);
 //3D matrix 3D vector multiplication.
-t_vec3		mtx_vec_mul3(t_mtx3 mtx, t_vec3 vec);
+t_vec3		ft_mtx_vec_mul3(t_mtx3 mtx, t_vec3 vec);
 //3D matrix 3D matrix multiplication.
-t_mtx3		mtx_mtx_mul3(t_mtx3 mtx1, t_mtx3 mtx2);
+t_mtx3		ft_mtx_mtx_mul3(t_mtx3 mtx1, t_mtx3 mtx2);
 
 //4D matrix row setter.
-void		set_row4(t_mtx4 *mtx, int row_val, t_vec4 row);
+void		ft_set_row4(t_mtx4 *mtx, int row_val, t_vec4 row);
 //Get values in row of 4D matrix.
-t_vec4		get_row4(t_mtx4 mtx, int row_val);
+t_vec4		ft_get_row4(t_mtx4 mtx, int row_val);
 //4D matrix 4D vector multiplication.
-t_vec4		mtx_vec_mul4(t_mtx4 mtx, t_vec4 vec);
+t_vec4		ft_mtx_vec_mul4(t_mtx4 mtx, t_vec4 vec);
 //4D matrix 4D matrix multiplication.
-t_mtx4		mtx_mtx_mul4(t_mtx4 mtx1, t_mtx4 mtx2);
+t_mtx4		ft_mtx_mtx_mul4(t_mtx4 mtx1, t_mtx4 mtx2);
 
 //3D vector to 4D vector conversion.
-t_vec4		vec3_to_vec4(t_vec3 vec3, double w);
+t_vec4		ft_vec3_to_vec4(t_vec3 vec3, double w);
 //4D vector to 3D vector conversion.
-t_vec3		vec4_to_vec3(t_vec4 vec4);
+t_vec3		ft_vec4_to_vec3(t_vec4 vec4);
 
 //------------------------- Color Functions ---------------------------
 
 /*4 channel int value color setter.
 a = Alpha, r = Red, g = Green, b = Blue*/
-t_color		set_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
+t_color		ft_set_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
 //Returns gradient value from given normalized value.
-t_color		get_gradient_val(t_color from, t_color to, double value);
+t_color		ft_get_gradient_val(t_color from, t_color to, double value);
 //Gradient initializer.
-t_gradient	set_gradient(t_color from, t_color to);
+t_gradient	ft_set_gradient(t_color from, t_color to);
 //Gradient inverter.
-t_gradient	inv_gradient(t_gradient in);
+t_gradient	ft_inv_gradient(t_gradient in);
 
-void		put_pixel(t_img *img, int x, int y, t_color color);
-void		draw_line(t_data *dt, t_vec3 pt1, t_vec3 pt2, t_color color);
-void		draw_tri(t_data *data, t_tri *tris, int j, t_color color);
-void		fill_img(t_data *data, t_color color);
-
-t_orto_conf	set_ort_conf(t_vec4 top_bot_right_left, t_vec2 near_far);
-t_pers_conf	set_pers_conf(t_vec4 near_far_fov_aspect);
-t_mtx4		orto_init(t_orto_conf configs);
-t_mtx4		pers_init(t_pers_conf configs);
+void		ft_put_pixel(t_img *img, int x, int y, t_color color);
+void		ft_draw_line(t_data *dt, t_vec3 pt1, t_vec3 pt2, t_color color);
+void		ft_draw_tri(t_data *data, t_tri *tris, int j, t_color color);
+void		ft_fill_img(t_data *data, t_color color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:14:42 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2023/12/06 17:07:36 by bgrhnzcn         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:41:24 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	fdf_get_size(t_fdf_data *d, t_fdf_map *map)
 			map->map_x = ft_strarrlen(d->data);
 		if (map->map_x != (int)ft_strarrlen(d->data))
 		{
-			free_str_arr(d->data);
+			ft_free_str_arr(d->data);
 			return (free(d->line), -1);
 		}
 		map->map_y++;
-		free_str_arr(d->data);
+		ft_free_str_arr(d->data);
 		free(d->line);
 	}
 	return (0);
@@ -59,7 +59,7 @@ static int	fdf_map_get_pos_data(t_fdf_data *d, t_fdf_map *map)
 			d->i++;
 		}
 		d->j++;
-		free_str_arr(d->data);
+		ft_free_str_arr(d->data);
 		free(d->line);
 	}
 	return (0);
@@ -98,13 +98,13 @@ static int	fdf_map_get_color(t_fdf_data *d, t_fdf_map *map)
 		d->i = 0;
 		while (d->i < map->map_x)
 		{
-			map->vertex_colors[d->i + (map->map_x * d->j)].value = ft_atoi_hex(
+			map->vertex_colors[d->i + (map->map_x * d->j)].value = get_color(
 					ft_strnstr(d->data[d->i], "0x",
 						ft_strlen(d->data[d->i])));
 			d->i++;
 		}
 		d->j++;
-		free_str_arr(d->data);
+		ft_free_str_arr(d->data);
 		free(d->line);
 	}
 	return (0);

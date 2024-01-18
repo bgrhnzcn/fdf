@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gradient_line.c                                    :+:      :+:    :+:   */
+/*   ft_bresenham_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 01:40:03 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/18 18:40:17 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 2023/11/07 20:06:06 by bgrhnzcn          #+#    #+#             */
+/*   Updated: 2024/01/18 18:28:38 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void	drw_ln_hlpr_high(t_draw_line *d)
+static void	ft_drw_ln_hlpr_high(t_draw_line *d)
 {
 	d->x += d->inc;
 	d->side_check = d->side_check + (2 * (d->delta.x - d->delta.y));
 }
 
-static void	drw_ln_hlpr_low(t_draw_line *d)
+static void	ft_drw_ln_hlpr_low(t_draw_line *d)
 {
 	d->y += d->inc;
 	d->side_check = d->side_check + (2 * (d->delta.y - d->delta.x));
 }
 
-static void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient gra)
+static void	ft_draw_line_low(t_data *dt, t_vec3 pt1, t_vec3 pt2, t_color color)
 {
 	t_draw_line	d;
 
@@ -39,20 +39,20 @@ static void	draw_line_low(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient gra)
 	d.side_check = (2 * d.delta.y) - d.delta.x;
 	d.y = pt1.y;
 	d.x = pt1.x;
-	while (d.x < pt2.x)
+	while (d.x < pt2.x && d.x < dt->win.height && d.x > 0)
 	{
-		if (d.y <= HEIGHT && d.y >= 0 && d.x <= WIDTH && d.x >= 0)
-			ft_put_pixel(img, d.x, d.y, ft_get_gradient_val(gra.from, gra.to,
-					ft_normalize(d.x, pt1.x, pt2.x)));
+		if (d.y <= dt->win.height && d.y >= 0 && d.x
+			<= dt->win.width && d.x >= 0)
+			ft_put_pixel(&dt->img, d.x, d.y, color);
 		if (d.side_check > 0)
-			drw_ln_hlpr_low(&d);
+			ft_drw_ln_hlpr_low(&d);
 		else
 			d.side_check = d.side_check + (2 * d.delta.y);
 		d.x++;
 	}
 }
 
-static void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient gra)
+static void	ft_draw_line_high(t_data *dt, t_vec3 pt1, t_vec3 pt2, t_color color)
 {
 	t_draw_line	d;
 
@@ -69,35 +69,31 @@ static void	draw_line_high(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient gra)
 	d.y = pt1.y;
 	while (d.y <= pt2.y)
 	{
-		if (d.y <= HEIGHT && d.y >= 0 && d.x <= WIDTH && d.x >= 0)
-			ft_put_pixel(img, d.x, d.y, ft_get_gradient_val(gra.from,
-					gra.to, ft_normalize(d.y, pt1.y, pt2.y)));
+		if (d.y <= dt->win.height && d.y >= 0 && d.x
+			<= dt->win.width && d.x >= 0)
+			ft_put_pixel(&dt->img, d.x, d.y, color);
 		if (d.side_check > 0)
-			drw_ln_hlpr_high(&d);
+			ft_drw_ln_hlpr_high(&d);
 		else
 			d.side_check = d.side_check + (2 * d.delta.x);
 		d.y++;
 	}
 }
 
-void	gradient_line(t_img *img, t_vec3 pt1, t_vec3 pt2, t_gradient grad)
+void	ft_draw_line(t_data *dt, t_vec3 pt1, t_vec3 pt2, t_color color)
 {
-	if ((pt2.x > WIDTH && pt1.x > WIDTH) || (pt2.x < 0 && pt1.x < 0))
-		return ;
-	if ((pt2.y > HEIGHT && pt1.y > HEIGHT) || (pt2.y < 0 && pt1.y < 0))
-		return ;
 	if (fabs(pt2.y - pt1.y) < fabs(pt2.x - pt1.x))
 	{
 		if (pt1.x > pt2.x)
-			draw_line_low(img, pt2, pt1, ft_inv_gradient(grad));
+			ft_draw_line_low(dt, pt2, pt1, color);
 		else
-			draw_line_low(img, pt1, pt2, grad);
+			ft_draw_line_low(dt, pt1, pt2, color);
 	}
 	else
 	{
 		if (pt1.y > pt2.y)
-			draw_line_high(img, pt2, pt1, ft_inv_gradient(grad));
+			ft_draw_line_high(dt, pt2, pt1, color);
 		else
-			draw_line_high(img, pt1, pt2, grad);
+			ft_draw_line_high(dt, pt1, pt2, color);
 	}
 }

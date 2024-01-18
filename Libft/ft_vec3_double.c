@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrays.c                                        :+:      :+:    :+:   */
+/*   ft_vec3_double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:01:27 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/18 18:27:50 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 2023/11/04 20:58:24 by buozcan           #+#    #+#             */
+/*   Updated: 2024/01/18 18:34:54 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strarrlen(char **arr)
+double	ft_vec3_dot(t_vec3 vec1, t_vec3 vec2)
 {
-	size_t	i;
+	double	res;
 
-	if (arr == NULL)
-		return (0);
-	i = 0;
-	while (arr[i] && *arr[i] != '\n')
-		i++;
-	return (i);
+	res = 0;
+	res += vec1.x * vec2.x;
+	res += vec1.y * vec2.y;
+	res += vec1.z * vec2.z;
+	return (res);
 }
 
-void	ft_free_str_arr(char **str_arr)
+double	ft_get_dist3(t_vec3 point1, t_vec3 point2)
 {
-	int	i;
+	return (sqrt(ft_vec3_dot(point1, point2)));
+}
 
-	i = 0;
-	while (str_arr[i])
-	{
-		free(str_arr[i]);
-		i++;
-	}
-	free(str_arr);
+double	ft_vec3_mag(t_vec3 vec)
+{
+	return (ft_get_dist3(ft_vec3_set(0, 0, 0), vec));
 }

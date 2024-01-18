@@ -8,14 +8,14 @@ CC = gcc
 
 CFLAGS = -g -Wall -Werror -Wextra
 
-MLX_FLAGS_LINUX = ft_printf/libftprintf.a get_next_line/get_next_line.a Libft/libft.a libmlx.a\
+MLX_FLAGS_LINUX = ft_printf/libftprintf.a get_next_line/get_next_line.a Libft/libft.a linux_lib/libmlx.a\
 			-Bdynamic -L/usr/lib/X11 -lXext -lX11 -lm
 
 MLX_FLAGS_MAC = Libft/libft.a get_next_line/get_next_line.a ft_printf/libftprintf.a mac_lib/libmlx.a -Bdynamic -framework OpenGL -framework AppKit
 
-SRCS = main.c input.c inits.c transforms.c \
-	utils_bresenham_line.c utils_display.c fdf_map.c \
-	gradient_line.c pipeline.c errors.c draw_map.c
+SRCS = main.c input.c inits.c transforms.c\
+	utils.c fdf_map.c gradient_line.c pipeline.c\
+	errors.c draw_map.c projections.c
 
 ifeq ($(shell uname),Linux)
 	MLX_FLAGS = $(MLX_FLAGS_LINUX)
@@ -36,7 +36,7 @@ $(NAME): libs $(OBJ)
 all: $(NAME)
 
 libs:
-	cd Libft && make
+	cd Libft && make USE_MATH="-D USE_MATH=1"
 	cd ft_printf && make
 	cd get_next_line && make
 

@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrays.c                                        :+:      :+:    :+:   */
+/*   ft_vec4_vec4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:01:27 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/18 18:27:50 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 2023/11/10 00:52:20 by bgrhnzcn          #+#    #+#             */
+/*   Updated: 2024/01/18 18:35:49 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strarrlen(char **arr)
+t_vec4	ft_vec4_norm(t_vec4 vec)
 {
-	size_t	i;
-
-	if (arr == NULL)
-		return (0);
-	i = 0;
-	while (arr[i] && *arr[i] != '\n')
-		i++;
-	return (i);
-}
-
-void	ft_free_str_arr(char **str_arr)
-{
-	int	i;
-
-	i = 0;
-	while (str_arr[i])
-	{
-		free(str_arr[i]);
-		i++;
-	}
-	free(str_arr);
+	return (ft_vec4_div(vec, ft_vec4_mag(vec)));
 }

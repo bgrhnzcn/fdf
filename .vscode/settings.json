@@ -29,7 +29,10 @@
     "**/.vscode/**"
   ],
   "files.associations": {
-    "keysym.h": "c"
+    "keysym.h": "c",
+    "libft.h": "c",
+    "stdlib.h": "c",
+    "math.h": "c"
   },
   "C_Cpp_Runner.msvcWarnings": [
     "/W4",

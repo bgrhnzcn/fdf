@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:34:50 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/09 20:26:41 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/18 17:00:24 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
-typedef struct s_pers_conf
-{
-	float	aspect_ratio;
-	float	field_of_view;
-	float	near_clip;
-	float	far_clip;
-}	t_pers_conf;
-
-typedef struct s_orto_conf
-{
-	float	top;
-	float	bot;
-	float	right;
-	float	left;
-	float	far;
-	float	near;
-}	t_orto_conf;
 
 typedef struct s_map
 {
@@ -161,20 +143,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_vec3_base
-{
-	const t_vec3	vec3_i;
-	const t_vec3	vec3_j;
-	const t_vec3	vec3_k;
-	const t_vec3	vec3_null;
-}	t_vec3_base;
-
-typedef struct s_mtx3_base
-{
-	const t_mtx3	mtx3_null;
-	const t_mtx3	mtx3_ident;
-}	t_mtx3_base;
-
 typedef struct s_draw_line
 {
 	t_vec2	delta;
@@ -211,9 +179,6 @@ typedef struct s_win
 
 typedef struct s_data
 {
-	t_mtx4		proj_mtx;
-	t_mtx4		mtx_glob;
-	t_mtx4		mtx_loc;
 	void		*mlx;
 	t_win		win;
 	t_img		img;

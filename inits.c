@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buozcan <buozcan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:53:25 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/17 21:19:45 by buozcan          ###   ########.fr       */
+/*   Updated: 2024/01/18 18:43:46 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	main_init(t_fdf *fdf, char *obj_path)
 	fdf->data.win.width = WIDTH;
 	fdf->data.mlx = mlx_init();
 	null_checker(fdf, fdf->data.mlx, MLX_ERROR);
-	fdf->data.proj_mtx = orto_init(set_ort_conf(vec4_set(
-				O_TOP, O_BOT, O_RIGHT, O_LEFT), vec2_set(O_NEAR, O_FAR)));
-	fdf->translation = vec3_set(0, 0, 0);
-	fdf->rotation = vec3_set(0, 0, 0);
-	fdf->scale = vec3_set(1, 1, 1);
+	fdf->proj_mtx = orto_init(set_ort_conf(ft_vec4_set(
+					O_TOP, O_BOT, O_RIGHT, O_LEFT),
+				ft_vec2_set(O_NEAR, O_FAR)));
+	fdf->translation = ft_vec3_set(0, 0, 0);
+	fdf->rotation = ft_vec3_set(0, 0, 0);
+	fdf->scale = ft_vec3_set(1, 1, 1);
 	mlx_do_key_autorepeaton(fdf->data.mlx);
 	fdf->map = fdf_map_init(obj_path);
 	null_checker(fdf, fdf->map, LOAD_ERROR);
@@ -55,7 +56,8 @@ void	main_init(t_fdf *fdf, char *obj_path)
 	null_checker(fdf, fdf->data.win.win, MLX_ERROR);
 	fdf->data.img.img = mlx_new_image(fdf->data.mlx, WIDTH, HEIGHT);
 	null_checker(fdf, fdf->data.img.img, MLX_ERROR);
-	fdf->data.img.data = mlx_get_data_addr(fdf->data.img.img, &fdf->data.img.bits_per_pixel,
+	fdf->data.img.data = mlx_get_data_addr(fdf->data.img.img,
+			&fdf->data.img.bits_per_pixel,
 			&fdf->data.img.size_line, &fdf->data.img.endian);
 	null_checker(fdf, fdf->data.img.data, MLX_ERROR);
 }

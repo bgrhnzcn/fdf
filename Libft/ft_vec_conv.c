@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrays.c                                        :+:      :+:    :+:   */
+/*   ft_vec_conv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgrhnzcn <bgrhnzcn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 17:01:27 by bgrhnzcn          #+#    #+#             */
-/*   Updated: 2024/01/18 18:27:50 by bgrhnzcn         ###   ########.fr       */
+/*   Created: 2023/11/08 19:44:26 by bgrhnzcn          #+#    #+#             */
+/*   Updated: 2024/01/18 18:33:00 by bgrhnzcn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strarrlen(char **arr)
+t_vec2	ft_vec3_to_vec2(t_vec3 vec3)
 {
-	size_t	i;
-
-	if (arr == NULL)
-		return (0);
-	i = 0;
-	while (arr[i] && *arr[i] != '\n')
-		i++;
-	return (i);
+	return (ft_vec2_set(vec3.x, vec3.y));
 }
 
-void	ft_free_str_arr(char **str_arr)
+t_vec3	ft_vec2_to_vec3(t_vec2 vec2, double z)
 {
-	int	i;
+	return (ft_vec3_set(vec2.x, vec2.y, z));
+}
 
-	i = 0;
-	while (str_arr[i])
-	{
-		free(str_arr[i]);
-		i++;
-	}
-	free(str_arr);
+t_vec4	ft_vec3_to_vec4(t_vec3 vec3, double w)
+{
+	return (ft_vec4_set(vec3.x, vec3.y, vec3.z, w));
+}
+
+t_vec3	ft_vec4_to_vec3(t_vec4 vec4)
+{
+	return (ft_vec3_set(vec4.x, vec4.y, vec4.z));
 }
